@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Jogo de Adivinhação</title>
+  </head>
+  <body>
+    <h1>Jogo de Adivinhação</h1>
+    <p>Você tem que adivinhar um número de 1 a 100. Quantas tentativas serão necessárias?</p>
+    <button onclick="jogar()">Jogar</button>
+
+    <script>
+      function gerarNumeroAleatorio() {
+        return Math.floor(Math.random() * 100) + 1;
+      }
+      
+      function pedirNumero() {
+        return parseInt(prompt("Digite um número de 1 a 100:"));
+      }
+      
+      function jogar() {
+        var numeroAleatorio = gerarNumeroAleatorio();
+        var numeroTentativas = 0;
+        var numeroJogador;
+        var historico = document.getElementById("historico");
+        historico.innerHTML = "";
+
+        while (numeroJogador !== numeroAleatorio) {
+          numeroTentativas++;
+          numeroJogador = pedirNumero();
+          historico.innerHTML += "<li>Tentativa " + numeroTentativas + ": " + numeroJogador + "</li>";
+
+          if (numeroJogador > numeroAleatorio) {
+            alert("O número é menor.");
+          } else if (numeroJogador < numeroAleatorio) {
+            alert("O número é maior.");
+          }
+        }
+
+        alert("Parabéns! Você acertou o número em " + numeroTentativas + " tentativas.");
+      }
+    </script>
+
+    <h2>Histórico de tentativas:</h2>
+    <ul id="historico"></ul>
+  </body>
+</html>
